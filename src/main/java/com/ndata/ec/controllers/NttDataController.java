@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class NttDataController {
 
-
+    @Autowired
     ClienteService clienteServiceImpl;
 
     @Autowired
