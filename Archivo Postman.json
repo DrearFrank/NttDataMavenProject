@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "3f898e47-c0f3-4c17-829a-608b8396fbb8",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All cuentas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/cuentas"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Cuentas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numero\": \"qwq\",\r\n    \"saldoInicial\": \"qwq\",\r\n    \"tipoCuenta\": \"Debito\",\r\n    \"estado\": \"Activa\",\r\n    \"clienteId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/cuentas/add"
+			},
+			"response": []
+		},
+		{
+			"name": "Deleted Cuentas",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/api/cuentas/deleted/4"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Cuenta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {      \"cliente\":\"jose lema\",\r\n        \"idCuenta\": 5,\r\n        \"numero\": \"12312\",\r\n        \"tipoCuenta\": \"Credito\",\r\n        \"saldoInicial\": 1000.0,\r\n        \"estado\": \"Activa\",\r\n        \"clienteId\":  2    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/cuentas/updated/5"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movimientos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Josssse dssnnnn\",\r\n    \"genero\": null,\r\n    \"edad\": null,\r\n    \"identificacion\": \"ewdddeee\",\r\n    \"direccion\": \"Otavalo sn y principal \",\r\n    \"telefono\": \"0988425083\",\r\n    \"clave\": \"154752\",\r\n     \"feCreacion\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/movimientos/listByFecha/2022-10-11/2022-10-13/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Movimeintos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n        \"feCreacion\": \"2022-03-11\",\r\n        \"cuentaId\": 11,\r\n        \"valor\": 800\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/movimientos/add"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Movimientos",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"feCreacion\": \"2022-03-11\",\r\n        \"cuentaId\": 11,\r\n        \"valor\": 800\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/movimientos/update/5"
+			},
+			"response": []
+		},
+		{
+			"name": "Deleted  Movimientos",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/api/movimientos/deleted/5"
+			},
+			"response": []
+		},
+		{
+			"name": "All clientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/clientes"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Clientes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"nombre\": \"Jose Laaema\",\r\n        \"genero\":\"M\",\r\n        \"edad\":\"12\",\r\n        \"identificacion\":\"1212\",\r\n        \"direccion\": \"Otavalo sn y principal \",\r\n        \"telefono\": \"0988322425083\",\r\n        \"clave\": \"15472352\",\r\n        \"estado\": \"Act\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/clientes"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Clientes",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"nombre\": \"Jose Laaema\",\r\n        \"genero\":\"M\",\r\n        \"edad\":\"12\",\r\n        \"identificacion\":\"1212\",\r\n        \"direccion\": \"Otavalo sn y principal \",\r\n        \"telefono\": \"0988322425083\",\r\n        \"clave\": \"15472352\",\r\n        \"estado\": \"Act\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/clientes/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Deleted Clientes",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/api/clientes/9"
+			},
+			"response": []
+		}
+	]
+}
