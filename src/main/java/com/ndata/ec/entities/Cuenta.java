@@ -33,27 +33,29 @@ public class Cuenta implements Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    @Column(name = "usuario_creacion")
-    String usuarioCreacion;
-    @Column(name = "fe_creacion")
-    Date feCreacion;
-    @Column(name = "ip_creacion")
-    String ipCreacion;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cuenta")
     private Long idCuenta;
+
+    @Column(name = "fe_creacion")
+    Date fechaCreacion;
+
+    @Column(name = "cliente_id")
+    private Long clienteId;
+
+    @Column(name = "tipo_cuenta")
+    private String tipoCuenta;
+
+    private String numero;
+    @Column(name = "saldo_inicial")
+
+    private Float saldoInicial;
+
+    private String estado;
+
     @ManyToOne()
     @JoinColumn(name = "cliente_id", insertable = false, updatable = false)
     private Cliente cliente;
-    @Column(name = "cliente_id")
-    private Long clienteId;
-    @Column(name = "tipo_cuenta")
-    private String tipoCuenta;
-    private String numero;
-    @Column(name = "saldo_inicial")
-    private Float saldoInicial;
-    private String estado;
-
 
 }

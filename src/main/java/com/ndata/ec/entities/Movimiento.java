@@ -32,10 +32,6 @@ public class Movimiento implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_movimiento")
 	private Long idMovimiento;
-	
-	@ManyToOne()
-	@JoinColumn(name = "cuenta_id", insertable = false, updatable = false)
-	private Cuenta cuenta;
 
 	@Column(name = "cuenta_id")
 	private Long cuentaId;
@@ -46,13 +42,10 @@ public class Movimiento implements Serializable{
 	private float valor;
 	private float saldo;
 	
-	@Column(name = "usuario_creacion")
-	String usuarioCreacion;
-	
 	@Column(name = "fe_creacion")
 	Date feCreacion;
-	
-	@Column(name = "ip_creacion")
-	String ipCreacion;	
 
+	@ManyToOne()
+	@JoinColumn(name = "cuenta_id", insertable = false, updatable = false)
+	private Cuenta cuenta;
 }

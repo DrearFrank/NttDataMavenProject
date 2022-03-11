@@ -12,11 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MovimientoVoRequest {
-
     private Long idMovimiento;
     private Long cuentaId;
     private float valor;
-    private String usuarioCreacion;
     private String feCreacion;
-    private String ipCreacion;
-}
+ }

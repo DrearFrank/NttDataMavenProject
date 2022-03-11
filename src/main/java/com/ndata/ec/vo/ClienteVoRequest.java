@@ -14,10 +14,6 @@ import lombok.Setter;
 @Setter
 public class ClienteVoRequest implements Serializable {
 
-    /**
-     *
-     */
-
     private Integer idCliente;
     private String nombre;
     private String genero;

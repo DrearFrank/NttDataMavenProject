@@ -15,6 +15,7 @@ import com.ndata.ec.service.impl.MovimientoService;
 import com.ndata.ec.utils.CustomException;
 import com.ndata.ec.utils.NdataConstans;
 import com.ndata.ec.vo.ClienteVoResponse;
+import com.ndata.ec.vo.CuentaVoRequest;
 import com.ndata.ec.vo.CuentaVoResponse;
 import com.ndata.ec.vo.MovimientoVoRequest;
 import com.ndata.ec.vo.MovimientoVoResponse;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -41,9 +43,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class NttDataController {
 
-
+    @Autowired
     ClienteService clienteServiceImpl;
 
     @Autowired
@@ -64,9 +67,10 @@ public class NttDataController {
         clienteServiceImpl.findAll().forEach(new Consumer<Cliente>() {
             @Override
             public void accept(final Cliente cliente) {
-                lstClienteResponse.add(new ClienteVoResponse(cliente.getNombre(), cliente
-                    .getDireccion(),
-                    cliente.getTelefono(), cliente.getClave(), cliente.getEstado()));
+                lstClienteResponse
+                    .add(new ClienteVoResponse(cliente.getIdCliente(), cliente.getNombre(), cliente
+                        .getDireccion(),
+                        cliente.getTelefono(), cliente.getClave(), cliente.getEstado()));
             }
         });
         if (lstClienteResponse.isEmpty()) {
@@ -79,7 +83,7 @@ public class NttDataController {
     public ResponseEntity<?> newCliente(@RequestBody Cliente cliente) throws Exception {
         if (clienteServiceImpl.existsCliente(cliente.getIdentificacion())) {
             //throw new CustomException("Cliente ya Existe");
-            throw new CustomException(HttpStatus.BAD_REQUEST, "Cliente ya Existe");
+            throw new CustomException(HttpStatus.BAD_REQUEST, NdataConstans.CLIENTE_EXISTE);
         }
         cliente = clienteServiceImpl.save(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
@@ -96,7 +100,7 @@ public class NttDataController {
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<?> deleteCliente(@PathVariable("id") long id) throws Exception {
         clienteServiceImpl.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/cuentas")
@@ -107,7 +111,8 @@ public class NttDataController {
             @Override
             public void accept(final Cuenta cuenta) {
                 lstCuentaResponse
-                    .add(new CuentaVoResponse(cuenta.getNumero(), cuenta.getTipoCuenta(),
+                    .add(new CuentaVoResponse(cuenta.getIdCuenta(), cuenta.getNumero(),
+                        cuenta.getTipoCuenta(),
                         cuenta.getSaldoInicial(), cuenta
                         .getEstado(),
                         cuenta.getCliente().getNombre()));
@@ -123,15 +128,23 @@ public class NttDataController {
     @PostMapping("/cuentas/add")
     public ResponseEntity<?> newCuenta(@RequestBody Cuenta cuenta) throws Exception {
         if (cuentaServiceImpl.existsCuenta(cuenta.getTipoCuenta(), cuenta.getNumero())) {
-            throw new CustomException(HttpStatus.BAD_REQUEST,"Cuenta ya Existe");
+            throw new CustomException(HttpStatus.BAD_REQUEST, "Cuenta ya Existe");
         }
         cuenta = cuentaServiceImpl.save(cuenta);
         return ResponseEntity.status(HttpStatus.OK).body(cuenta);
     }
 
     @PutMapping("/cuentas/updated/{id}")
-    public ResponseEntity<?> updateCuenta(@PathVariable("id") long id, @RequestBody Cuenta cuenta)
+    public ResponseEntity<?> updateCuenta(@PathVariable("id") long id,
+        @RequestBody CuentaVoRequest cuentaVo)
         throws Exception {
+        Cuenta cuenta = new Cuenta();
+        cuenta.setClienteId(cuentaVo.getClienteId());
+        cuenta.setIdCuenta(cuentaVo.getIdCuenta());
+        cuenta.setNumero(cuentaVo.getNumero());
+        cuenta.setTipoCuenta(cuentaVo.getTipoCuenta());
+        cuenta.setSaldoInicial(cuentaVo.getSaldoInicial());
+        cuenta.setEstado(cuentaVo.getEstado());
         Cuenta cuentaData = cuentaServiceImpl.update(id, cuenta);
         return ResponseEntity.status(HttpStatus.OK).body(cuentaData);
     }
@@ -139,7 +152,7 @@ public class NttDataController {
     @DeleteMapping("/cuentas/deleted/{id}")
     public ResponseEntity<?> deleteCuentas(@PathVariable("id") long id) throws Exception {
         cuentaServiceImpl.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/movimientos/listByFecha/{fechaInicial}/{fechaFinal}/{id}")
@@ -148,7 +161,7 @@ public class NttDataController {
         @PathVariable("fechaFinal") String fechaFinal, @PathVariable("id") Long id)
         throws Exception {
         List<MovimientoVoResponse> lstMovimientoResponse = new ArrayList<MovimientoVoResponse>();
-        log.info("Fechas {} {}", fechaInicial, fechaFinal);
+        log.info("Fechas {}", fechaInicial, fechaFinal);
         movimientoServiceImpl
             .getEstadoCuenta(id, Date.valueOf(fechaInicial), Date.valueOf(fechaFinal))
             .forEach(new Consumer<Movimiento>() {
@@ -164,6 +177,7 @@ public class NttDataController {
                         .getSaldo()));
                 }
             });
+
         if (lstMovimientoResponse.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -200,9 +214,7 @@ public class NttDataController {
         movimiento.setTipoMovimiento(tipoMovimiento);
         movimiento.setValor(movimientoDto.getValor());
         movimiento.setSaldo(saldo);
-        movimiento.setUsuarioCreacion(movimientoDto.getUsuarioCreacion());
         movimiento.setFeCreacion(Date.valueOf(movimientoDto.getFeCreacion()));
-        movimiento.setIpCreacion(movimientoDto.getIpCreacion());
         movimiento = movimientoServiceImpl.save(movimiento);
         movimientoDto.setIdMovimiento(movimiento.getIdMovimiento());
         return ResponseEntity.status(HttpStatus.OK).body(movimientoDto);
@@ -220,7 +232,7 @@ public class NttDataController {
     @DeleteMapping("/movimientos/deleted/{id}")
     public ResponseEntity<?> deleteMovimientos(@PathVariable("id") long id) throws Exception {
         movimientoServiceImpl.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping("movimientos/{id}")

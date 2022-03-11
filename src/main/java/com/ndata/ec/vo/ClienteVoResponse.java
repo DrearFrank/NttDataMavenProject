@@ -18,6 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ClienteVoResponse implements Serializable {
 
+    private Long idCliente;
     private String nombre;
     private String direccion;
     private String telefono;

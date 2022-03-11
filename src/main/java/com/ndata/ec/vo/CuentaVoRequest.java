@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CuentaVoResponse implements Serializable {
+public class CuentaVoRequest implements Serializable {
 
     private Long idCuenta;
     private String numero;
@@ -22,4 +22,5 @@ public class CuentaVoResponse implements Serializable {
     private Float saldoInicial;
     private String estado;
     private String cliente;
+    private Long ClienteId;
 }
