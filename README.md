@@ -34,3 +34,6 @@ y copiamos el Id de la imagen y reemplazar en el siguiente comando la pabla ID_I
 > Lista servicios.json
 
 #### 3.- verifcar desde postman con los metodos tipo get que la informacion ingresada se encuentre disponible
+
+![image](https://user-images.githubusercontent.com/29445798/160481426-1eebd0b4-9f72-4731-841e-c9f1ef482331.png)
+
