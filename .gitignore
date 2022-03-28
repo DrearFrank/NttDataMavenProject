@@ -1,8 +1,15 @@
 # Compiled class file
 *.class
-
+/target
 # Log file
 *.log
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+# tageget
+.target
 
 # BlueJ files
 *.ctxt

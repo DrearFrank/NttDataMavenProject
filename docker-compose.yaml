@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  dbpostgresql:
+    image: postgres
+    container_name: dbpostgresql
+    restart: always
+    environment:
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=nttdata
+      - POSTGRES_HOST=localHost
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=postgres
+    ports:
+      - "5432:5432"
+  app:
+    container_name: nttData-0.0.1-snapshot
+    image: nttdata-postgresgl
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dbpostgresql

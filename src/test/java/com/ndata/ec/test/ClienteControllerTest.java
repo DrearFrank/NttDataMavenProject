@@ -28,8 +28,7 @@ class ClienteControllerTest {
     @Test
     @Ignore
     void testGetAll() throws Exception {
-
-        Cliente resultSearch = clienteServiceImpl.findById((long) 1);
+        Cliente resultSearch = clienteServiceImpl.findById((long) 2);
         if (resultSearch != null) {
             log.info("Nombre = {}", resultSearch.getNombre());
         }

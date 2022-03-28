@@ -7,16 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="NttDataMavenProject" />
+        <module name="NttData" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="NttDataMavenProject" target="11" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="NttDataMavenProject" options="-parameters" />
+      <module name="NttData" options="-parameters" />
     </option>
   </component>
 </project>
