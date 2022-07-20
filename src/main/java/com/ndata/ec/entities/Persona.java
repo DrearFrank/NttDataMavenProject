@@ -16,8 +16,8 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-@Table(name = "persona")
-public class Persona implements Serializable {
+//@Table(name = "persona")
+public abstract class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -16,6 +16,10 @@ public class CustomException extends RuntimeException {
 
     private HttpStatus status;
 
+    public CustomException(String mensaje) {
+        super(mensaje);
+    }
+
     public CustomException(HttpStatus status, String mensaje) {
         super(mensaje);
         this.status = status;

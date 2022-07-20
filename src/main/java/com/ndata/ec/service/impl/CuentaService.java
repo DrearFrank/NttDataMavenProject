@@ -8,6 +8,7 @@ import com.ndata.ec.entities.Movimiento;
 import com.ndata.ec.repositories.BaseRepository;
 import com.ndata.ec.repositories.CuentaRepository;
 import com.ndata.ec.service.ICuentaService;
+import com.ndata.ec.utils.CustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +42,14 @@ public class CuentaService extends BaseService<Cuenta, Long> implements ICuentaS
     @Override
     public boolean existsCuenta(String tipoCuenta, String numero) throws Exception {
         boolean isCuenta = false;
-        Cuenta cuenta = this.findByTipoCuentaAndNumero(tipoCuenta, numero);
 
-        if (cuenta != null) {
-            isCuenta = true;
-        }
-        return isCuenta;
+            Cuenta cuenta = this.findByTipoCuentaAndNumero(tipoCuenta, numero);
+            if(cuenta!=null){
+                return isCuenta = true;
+            }
+            else{
+                throw new CustomException("no existe cuenta");
+            }
     }
 
     @Override
@@ -59,6 +62,6 @@ public class CuentaService extends BaseService<Cuenta, Long> implements ICuentaS
                 ReflectionUtils.setField(field, optionalCuenta.get(), value);
             });
         }
-        return cuentaRepository.saveAndFlush(optionalCuenta.get());
+        return cuentaRepository.save(optionalCuenta.get());
     }
 }

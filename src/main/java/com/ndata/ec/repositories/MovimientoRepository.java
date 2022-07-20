@@ -27,4 +27,6 @@ public interface MovimientoRepository extends BaseRepository<Movimiento, Long> {
     Optional<Movimiento> findFirstByCuentaIdOrderByIdMovimientoDesc(Long cuentaId);
 
 
+
+
 }

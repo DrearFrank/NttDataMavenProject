@@ -1,6 +1,7 @@
 package com.ndata.ec.repositories;
 
 import com.ndata.ec.entities.Cliente;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @version 1.0
  */
 @Repository
-public interface ClienteRepository extends BaseRepository<Cliente, Long> {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     Cliente findByIdentificacion(String identificacion);
 }

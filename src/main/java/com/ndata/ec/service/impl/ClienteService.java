@@ -4,10 +4,12 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Optional;
 import com.ndata.ec.entities.Cliente;
+import com.ndata.ec.entities.Persona;
 import com.ndata.ec.repositories.BaseRepository;
 import com.ndata.ec.repositories.ClienteRepository;
 import com.ndata.ec.service.IClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -21,7 +23,7 @@ import org.springframework.util.ReflectionUtils;
 public class ClienteService extends BaseService<Cliente, Long> implements
     IClienteService {
 
-    @Autowired
+    @Qualifier
     private ClienteRepository clienteRepository;
 
     public ClienteService(BaseRepository<Cliente, Long> baseRepository) {

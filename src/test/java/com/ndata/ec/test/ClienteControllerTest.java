@@ -32,6 +32,7 @@ class ClienteControllerTest {
         if (resultSearch != null) {
             log.info("Nombre = {}", resultSearch.getNombre());
         }
+
     }
 
     @Test

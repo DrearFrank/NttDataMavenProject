@@ -1,6 +1,7 @@
 package com.ndata.ec.entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.tomcat.jni.Time;
 
 /**
  * Class Entity for external process.
@@ -44,6 +46,5 @@ public class Cliente extends Persona {
 
     @Column(name = "fe_creacion")
     private Date feCreacion;
-
 
 }

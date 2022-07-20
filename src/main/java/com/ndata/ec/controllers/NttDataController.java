@@ -162,7 +162,12 @@ public class NttDataController {
         throws Exception {
         List<MovimientoVoResponse> lstMovimientoResponse = new ArrayList<MovimientoVoResponse>();
         log.info("Fechas {}", fechaInicial, fechaFinal);
-        movimientoServiceImpl
+
+       lstMovimientoResponse.stream().forEach(temp->{
+
+       });
+
+       /* movimientoServiceImpl
             .getEstadoCuenta(id, Date.valueOf(fechaInicial), Date.valueOf(fechaFinal))
             .forEach(new Consumer<Movimiento>() {
                 @Override
@@ -177,7 +182,7 @@ public class NttDataController {
                         .getSaldo()));
                 }
             });
-
+*/
         if (lstMovimientoResponse.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
